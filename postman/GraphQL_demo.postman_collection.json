@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "6b164ef5-e6a5-40c3-a0f4-2843a017e29c",
+		"name": "GraphQL demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"anand\",\n\t\"password\": \"khatri\",\n\t\"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorisation",
+						"value": "Token eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInBhc3N3b3JkIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4ifQ.2Dh4JvFv_SBf0C31QkyttKZ_RJI7A3dYDf-GmwwldcYZljSiergqjqhxamyrcz0xFlHNDkUrGSSQeimMJgaJkA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  findAllAuthors {\n    firstName\n  }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

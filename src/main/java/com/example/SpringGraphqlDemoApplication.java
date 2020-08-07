@@ -2,9 +2,11 @@ package com.example;
 
 import com.example.entity.AuthorEntity;
 import com.example.entity.BookEntity;
+import com.example.entity.UserEntity;
 import com.example.exception.GraphQLErrorAdapter;
 import com.example.repository.AuthorRepository;
 import com.example.repository.BookRepository;
+import com.example.repository.UserRepository;
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
 import graphql.servlet.GraphQLErrorHandler;
@@ -12,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +54,7 @@ public class SpringGraphqlDemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(AuthorRepository authorRepository, BookRepository bookRepository) {
+	public CommandLineRunner demo(AuthorRepository authorRepository, BookRepository bookRepository, UserRepository userRepository) {
 		return (args) -> {
 			AuthorEntity author = AuthorEntity.builder().firstName("Herbert").lastName("Schildt").build();
 			authorRepository.save(author);
@@ -63,6 +66,12 @@ public class SpringGraphqlDemoApplication {
 					.author(author)
 					.build();
 			bookRepository.save(bookEntity);
+
+			List<UserEntity> users = new ArrayList<>();
+			users.add(UserEntity.builder().userName("test").password("test").build());
+			users.add(UserEntity.builder().userName("admin").password("admin").build());
+			users.add(UserEntity.builder().userName("manager").password("manager").build());
+			userRepository.saveAll(users);
 		};
 	}
 }
